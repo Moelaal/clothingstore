@@ -45,7 +45,7 @@ const SidebarContainer = styled.div`
     padding: 1rem 1.5rem;
   }
   .close-btn {
-    font-size: 2rem;
+    font-size: 2.2rem;
     background: transparent;
     border-color: transparent;
     color: var(--clr-primary-5);
@@ -59,7 +59,7 @@ const SidebarContainer = styled.div`
   }
   .logo {
     justify-self: center;
-    height: 45px;
+    height: 50px;
   }
   .links {
     margin-bottom: 2rem;
