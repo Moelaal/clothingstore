@@ -196,6 +196,7 @@ p {
   background: var(--clr-primary-5);
   margin-left: auto;
   margin-right: auto;
+  color: #4c3575;
 }
 .page-100 {
   min-height: calc(100vh - 10rem);
