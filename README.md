@@ -3,17 +3,17 @@
 #### Older React Version
 
 ```
-"react": "^16.13.1",
-"react-dom": "^16.13.1",
-"react-scripts": "3.4.3",
+"react": "^17.13.1",
+"react-dom": "^17.13.1",
+"react-scripts": "4.4.3",
 ```
 
 #### Current React Version
 
 ```
-"react": "^17.0.1",
-"react-dom": "^17.0.1",
-"react-scripts": "4.0.0",
+"react": "^18.0.1",
+"react-dom": "^18.0.1",
+"react-scripts": "5.0.0",
 ```
 
 #### Alternative fix
