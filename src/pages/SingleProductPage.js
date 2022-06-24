@@ -13,11 +13,54 @@ import {
 } from '../components';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { FaAcquisitionsIncorporated } from 'react-icons/fa';
 
 const SingleProductPage = () => {
   const { id } = useParams();
-  console.log(id);
-  return <Wrapper></Wrapper>;
+  const history = useHistory();
+  const {
+    single_product_loading: loading,
+    single_product_error: error,
+    single_product: product,
+    fetchSingleProduct,
+  } = useProductsContext();
+
+  useEffect(() => {
+    fetchSingleProduct(`${url}${id}`);
+  }, [id]);
+
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    setTimeout(() => {
+      history.push('/');
+    }, 3000);
+  }
+  console.log(product);
+  {
+    const {
+      category,
+      colors,
+      company,
+      description,
+      featured,
+      id,
+      name,
+      price,
+      reviews,
+      shipping,
+      starts,
+      stock,
+    } = product;
+    return (
+      <Wrapper>
+        <div className="product-center">
+          <h1>{name}</h1>
+        </div>
+      </Wrapper>
+    );
+  }
 };
 
 const Wrapper = styled.main`
