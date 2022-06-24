@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet-async';
 import { PageHero } from '../components';
 import aboutImg from '../assets/hero-bcg.jpeg';
 
 const AboutPage = () => {
   return (
     <main>
+      <Helmet>
+        <title>about page</title>
+      </Helmet>
       <PageHero title="about" />
       <Wrapper className="page section section-center">
         <img src={aboutImg} alt="" />
