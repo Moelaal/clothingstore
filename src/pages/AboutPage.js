@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
 import { PageHero } from '../components';
-import aboutImg from '../assets/hero-bcg.jpeg';
+import aboutImg from '../assets/furniture-1.jpg';
 
 const AboutPage = () => {
   return (

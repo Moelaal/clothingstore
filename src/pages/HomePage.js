@@ -5,11 +5,15 @@ import { FeaturedProducts, Hero, Services, Contact } from '../components';
 
 const HomePage = () => {
   return (
-    <>
+    <main>
       <Helmet>
         <title>Clothing Store</title>
       </Helmet>
-    </>
+      <Hero />
+      <FeaturedProducts />
+      <Services />
+      <Contact />
+    </main>
   );
 };
 
