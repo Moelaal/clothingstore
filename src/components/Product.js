@@ -15,7 +15,7 @@ const Product = ({ id, image, price, name }) => {
       </div>
       <footer>
         <h5>{name}</h5>
-        <p>{formatPrice(price)}</p>
+        <p className="price">{formatPrice(price)}</p>
       </footer>
     </Wrapper>
   );
@@ -59,6 +59,10 @@ const Wrapper = styled.article`
   }
   .container:hover .link {
     opacity: 1;
+  }
+  .price {
+    color: #ffc54d;
+    font-size: 1.25rem;
   }
   footer {
     margin-top: 1rem;

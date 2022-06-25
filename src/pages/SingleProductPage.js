@@ -64,6 +64,26 @@ const SingleProductPage = () => {
         </Link>
         <div className=" product-center">
           <ProductImages images={images} />
+          <div className="content">
+            <h2>{name}</h2>
+            <Stars stars={stars} reviews={reviews} />
+            <h4 className="price">{formatPrice(price)}</h4>
+            <p className="dsc">{description}</p>
+            <p className="info">
+              <span>Available : </span>
+              {stock > 0 ? 'In Stock' : 'Out of Stock'}
+            </p>
+            <p className="info">
+              <span>SKU : </span>
+              {id}
+            </p>
+            <p className="info">
+              <span>Brand : </span>
+              {company}
+            </p>
+            <hr />
+            {stock > 0 && <AddToCart product={product} />}
+          </div>
         </div>
       </div>
     </Wrapper>
@@ -77,7 +97,7 @@ const Wrapper = styled.main`
     margin-top: 2rem;
   }
   .price {
-    color: var(--clr-primary-5);
+    color: #ffc54d;
   }
   .desc {
     line-height: 2;
