@@ -13,7 +13,6 @@ import {
 } from '../components';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { FaAcquisitionsIncorporated } from 'react-icons/fa';
 
 const SingleProductPage = () => {
   const { id } = useParams();
@@ -27,40 +26,48 @@ const SingleProductPage = () => {
 
   useEffect(() => {
     fetchSingleProduct(`${url}${id}`);
+    // eslint-disable-next-line
   }, [id]);
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        history.push('/');
+      }, 3000);
+    }
+    // eslint-disable-next-line
+  }, [error]);
 
   if (loading) {
     return <Loading />;
   }
   if (error) {
-    setTimeout(() => {
-      history.push('/');
-    }, 3000);
+    return <Error />;
   }
-  console.log(product);
-  {
-    const {
-      category,
-      colors,
-      company,
-      description,
-      featured,
-      id,
-      name,
-      price,
-      reviews,
-      shipping,
-      starts,
-      stock,
-    } = product;
-    return (
-      <Wrapper>
-        <div className="product-center">
-          <h1>{name}</h1>
+  const {
+    name,
+    price,
+    description,
+    stock,
+    stars,
+    reviews,
+    id: sku,
+    company,
+    images,
+  } = product;
+  return (
+    <Wrapper>
+      <PageHero title={name} product />
+      <div className="section section-center page">
+        <Link to="/products" className="btn">
+          back to products
+        </Link>
+        <div className=" product-center">
+          <ProductImages images={images} />
         </div>
-      </Wrapper>
-    );
-  }
+      </div>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.main`
