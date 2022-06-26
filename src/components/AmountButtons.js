@@ -12,7 +12,7 @@ const AmountButtons = ({ increase, decrease, amount }) => {
       <button
         type="button"
         className="amount-btn"
-        disabled={amount === 0}
+        disabled={amount === 1}
         onClick={decrease}
       >
         <FaMinus />
