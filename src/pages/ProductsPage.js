@@ -5,11 +5,21 @@ import { Filters, ProductList, Sort, PageHero } from '../components';
 
 const ProductsPage = () => {
   return (
-    <Wrapper>
+    <main>
       <Helmet>
         <title>Products page</title>
       </Helmet>
-    </Wrapper>
+      <PageHero title="Products" />
+      <Wrapper className="page">
+        <div className="section-center products">
+          <Filters />
+          <div>
+            <Sort />
+            <ProductList />
+          </div>
+        </div>
+      </Wrapper>
+    </main>
   );
 };
 
