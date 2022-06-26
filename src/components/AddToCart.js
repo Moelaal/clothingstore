@@ -9,6 +9,7 @@ const AddToCart = ({ product }) => {
   // const {} = useCartContext();
   const { id, stock, colors } = product;
   const [amount, setAmount] = useState(1);
+  const [mainColor, setMainColor] = useState(colors[0]);
 
   const increase = () => {
     setAmount((prevAmount) => {
@@ -30,8 +31,27 @@ const AddToCart = ({ product }) => {
   };
   return (
     <Wrapper>
-      <AmountButtons amount={amount} increase={increase} decrease={decrease} />
+      <div className="colors">
+        <span>Colors : </span>
+        {colors.map((color, index) => (
+          <button
+            className={`${
+              mainColor === color ? 'active color-btn' : 'color-btn'
+            }`}
+            style={{ background: color }}
+            onClick={() => setMainColor(color)}
+            key={index}
+          >
+            {mainColor === color ? <FaCheck /> : null}
+          </button>
+        ))}
+      </div>
       <div className="btn-container">
+        <AmountButtons
+          amount={amount}
+          increase={increase}
+          decrease={decrease}
+        />
         <Link to="/cart" className="btn">
           Add to cart
         </Link>
@@ -61,7 +81,7 @@ const Wrapper = styled.section`
     height: 1.5rem;
     border-radius: 50%;
     background: #222;
-    margin-right: 0.5rem;
+
     border: none;
     cursor: pointer;
     opacity: 0.5;
