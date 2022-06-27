@@ -15,17 +15,15 @@ const Sort = () => {
           <BsList />
         </button>
       </div>
-      <div>
-        <p>({products.length} products)</p>
-      </div>
-      <br />
+      <p>({products.length} products)</p>
+      <hr />
       <form>
         <label htmlFor="sort">Sorting</label>
         <select name="sort" id="sort" className="sort-input">
           <option value="price-low">Lowest price</option>
           <option value="price-high">Highest price</option>
-          <option value="name-a">from A-Z</option>
-          <option value="name-z">from Z-A</option>
+          <option value="name-a">from a-z</option>
+          <option value="name-z">from z-a</option>
         </select>
       </form>
     </Wrapper>
