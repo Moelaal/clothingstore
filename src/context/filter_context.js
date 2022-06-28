@@ -22,8 +22,8 @@ const initialState = {
     company: 'all',
     category: 'all',
     color: 'all',
-    minPrice: 0,
-    maxPrice: 0,
+    min_price: 0,
+    max_price: 0,
     price: 0,
     shipping: false,
   },
@@ -42,7 +42,7 @@ export const FilterProvider = ({ children }) => {
   useEffect(() => {
     dispatch({ type: FILTER_PRODUCTS });
     dispatch({ type: SORT_PRODUCTS });
-  }, [state.sort, state.filters]);
+  }, [products, state.sort, state.filters]);
 
   const setGridView = () => {
     dispatch({ type: SET_GRIDVIEW });
@@ -51,6 +51,8 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: SET_LISTVIEW });
   };
   const updateSort = (e) => {
+    // for demonstration
+    // const name = e.target.name
     const value = e.target.value;
     dispatch({ type: UPDATE_SORT, payload: value });
   };
@@ -60,14 +62,14 @@ export const FilterProvider = ({ children }) => {
     if (name === 'category') {
       value = e.target.textContent;
     }
+    if (name === 'color') {
+      value = e.target.dataset.color;
+    }
     if (name === 'price') {
       value = Number(value);
     }
     if (name === 'shipping') {
       value = e.target.checked;
-    }
-    if (name === 'color') {
-      value = e.target.dataset.color;
     }
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };

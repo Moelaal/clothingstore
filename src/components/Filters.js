@@ -8,43 +8,44 @@ const Filters = () => {
   const {
     filters: {
       text,
-      company,
       category,
+      company,
       color,
-      shipping,
+      min_price,
       price,
-      maxPrice,
-      minPrice,
+      max_price,
+      shipping,
     },
     updateFilters,
     clearFilters,
     all_products,
   } = useFilterContext();
-  const submitHandler = (e) => {
-    e.preventDefault();
-  };
+
   const categories = getUniqueValues(all_products, 'category');
   const companies = getUniqueValues(all_products, 'company');
   const colors = getUniqueValues(all_products, 'colors');
+
   return (
     <Wrapper>
       <div className="content">
-        <form onSubmit={submitHandler}>
+        <form onSubmit={(e) => e.preventDefault()}>
+          {/* search input */}
           <div className="form-control">
             <input
               type="text"
               name="text"
+              placeholder="search"
               className="search-input"
-              placeholder="search product"
               value={text}
               onChange={updateFilters}
             />
           </div>
-          {/** category */}
+          {/* end search input */}
+          {/* categories */}
           <div className="form-control">
-            <h5>Category</h5>
+            <h5>category</h5>
             <div>
-              {categories.map((cat, index) => {
+              {categories.map((c, index) => {
                 return (
                   <button
                     key={index}
@@ -52,77 +53,65 @@ const Filters = () => {
                     type="button"
                     name="category"
                     className={`${
-                      category === cat.toLowerCase() ? 'active' : null
+                      category === c.toLowerCase() ? 'active' : null
                     }`}
                   >
-                    {cat}
+                    {c}
                   </button>
                 );
               })}
             </div>
           </div>
-          {/** company */}
+          {/* end of categories */}
+          {/* companies */}
           <div className="form-control">
-            <h5>Company</h5>
-            <div>
-              <select
-                value={company}
-                name="company"
-                id="company"
-                className="company"
-                onChange={updateFilters}
-              >
-                {companies.map((comp, index) => {
-                  return (
-                    <option key={index} value={comp}>
-                      {comp}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
-          {/** price */}
-          <div className="form-control">
-            <h5>Price</h5>
-            <p className="price">{formatPrice(price)}</p>
-            <input
-              type="range"
-              name="price"
-              id="price"
-              max={maxPrice}
-              min={minPrice}
-              value={price}
+            <h5>company</h5>
+            <select
+              name="company"
+              value={company}
               onChange={updateFilters}
-            />
+              className="company"
+            >
+              {companies.map((c, index) => {
+                return (
+                  <option key={index} value={c}>
+                    {c}
+                  </option>
+                );
+              })}
+            </select>
           </div>
-          {/** colors */}
+          {/* end of companies */}
+          {/* 
+          colors
+          */}
           <div className="form-control">
-            <h5>Colors</h5>
+            <h5>colors</h5>
             <div className="colors">
               {colors.map((c, index) => {
                 if (c === 'all') {
                   return (
                     <button
+                      key={index}
+                      name="color"
                       onClick={updateFilters}
+                      data-color="all"
                       className={`${
                         color === 'all' ? 'all-btn active' : 'all-btn'
                       }`}
-                      data-color="all"
-                      name="color"
                     >
-                      All
+                      all
                     </button>
                   );
                 }
                 return (
                   <button
                     key={index}
+                    name="color"
                     style={{ background: c }}
                     className={`${
                       color === c ? 'color-btn active' : 'color-btn'
                     }`}
-                    name="color"
                     data-color={c}
                     onClick={updateFilters}
                   >
@@ -132,9 +121,26 @@ const Filters = () => {
               })}
             </div>
           </div>
-          {/** shipping */}
+          {/* 
+end of           colors
+          */}
+          {/* price */}
+          <div className="form-control">
+            <h5>price</h5>
+            <p className="price">{formatPrice(price)}</p>
+            <input
+              type="range"
+              name="price"
+              min={min_price}
+              max={max_price}
+              onChange={updateFilters}
+              value={price}
+            />
+          </div>
+          {/* end of price */}
+          {/* shippping */}
           <div className="form-control shipping">
-            <label htmlFor="shipping">Free shipping</label>
+            <label htmlFor="shipping"> free shipping</label>
             <input
               type="checkbox"
               name="shipping"
@@ -143,9 +149,11 @@ const Filters = () => {
               checked={shipping}
             />
           </div>
+          {/* end of  shippping */}
         </form>
-        <button className="clear-btn" onClick={clearFilters} type="button">
-          Clear filters
+        <button type="button" className="clear-btn" onClick={clearFilters}>
+          {' '}
+          clear filters
         </button>
       </div>
     </Wrapper>
