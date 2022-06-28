@@ -60,6 +60,39 @@ const Filters = () => {
               })}
             </div>
           </div>
+          <div className="form-control">
+            <h5>Company</h5>
+            <div>
+              <select
+                value={company}
+                name="company"
+                id="company"
+                className="company"
+                onChange={updateFilters}
+              >
+                {companies.map((comp, index) => {
+                  return (
+                    <option key={index} value={comp}>
+                      {comp}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          </div>
+          <div className="form-control">
+            <h5>Price</h5>
+            <p className="price">{formatPrice(price)}</p>
+            <input
+              type="range"
+              id="price"
+              name="price"
+              onChange={updateFilters}
+              value={price}
+              min={minPrice}
+              max={maxPrice}
+            />
+          </div>
         </form>
       </div>
     </Wrapper>
