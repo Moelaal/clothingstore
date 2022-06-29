@@ -13,12 +13,16 @@ const filter_reducer = (state, action) => {
   if (action.type === LOAD_PRODUCTS) {
     let maxPrice = action.payload.map((p) => p.price);
     maxPrice = Math.max(...maxPrice);
-
+    console.log(maxPrice);
     return {
       ...state,
       all_products: [...action.payload],
       filtered_products: [...action.payload],
-      filters: { ...state.filters, max_price: maxPrice, price: maxPrice },
+      filters: {
+        ...state.filters,
+        max_price: maxPrice,
+        price: maxPrice,
+      },
     };
   }
   if (action.type === SET_GRIDVIEW) {
@@ -48,14 +52,10 @@ const filter_reducer = (state, action) => {
       tempProducts = tempProducts.sort((a, b) => b.price - a.price);
     }
     if (sort === 'name-a') {
-      tempProducts = tempProducts.sort((a, b) => {
-        return a.name.localeCompare(b.name);
-      });
+      tempProducts = tempProducts.sort((a, b) => a.name.localeCompare(b.name));
     }
     if (sort === 'name-z') {
-      tempProducts = tempProducts.sort((a, b) => {
-        return b.name.localeCompare(a.name);
-      });
+      tempProducts = tempProducts.sort((a, b) => b.name.localeCompare(a.name));
     }
     return { ...state, filtered_products: tempProducts };
   }
@@ -65,15 +65,13 @@ const filter_reducer = (state, action) => {
   }
   if (action.type === FILTER_PRODUCTS) {
     const { all_products } = state;
-    const { text, category, company, color, price, shipping } = state.filters;
-
+    const { text, category, color, company, price, shipping } = state.filters;
     let tempProducts = [...all_products];
-    // filtering
-    // text
+
     if (text) {
-      tempProducts = tempProducts.filter((product) => {
-        return product.name.toLowerCase().startsWith(text);
-      });
+      tempProducts = tempProducts.filter((product) =>
+        product.name.toLowerCase().startsWith(text)
+      );
     }
     // category
     if (category !== 'all') {
@@ -81,27 +79,25 @@ const filter_reducer = (state, action) => {
         (product) => product.category === category
       );
     }
-
-    // company
+    //company
     if (company !== 'all') {
-      tempProducts = tempProducts.filter(
-        (product) => product.company === company
-      );
+      tempProducts = tempProducts.filter((product) => {
+        return product.company === company;
+      });
     }
-    // colors
+    //color
     if (color !== 'all') {
       tempProducts = tempProducts.filter((product) => {
         return product.colors.find((c) => c === color);
       });
     }
-    // price
-    tempProducts = tempProducts.filter((product) => product.price <= price);
     // shipping
     if (shipping) {
       tempProducts = tempProducts.filter(
         (product) => product.shipping === true
       );
     }
+    tempProducts = tempProducts.filter((product) => product.price <= price);
 
     return { ...state, filtered_products: tempProducts };
   }
@@ -119,6 +115,7 @@ const filter_reducer = (state, action) => {
       },
     };
   }
+
   throw new Error(`No Matching "${action.type}" - action type`);
 };
 

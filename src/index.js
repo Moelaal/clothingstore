@@ -13,11 +13,11 @@ ReactDOM.render(
   // <UserProvider>
   <ProductsProvider>
     <FilterProvider>
-      {/* <CartProvider> */}
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>
-      {/* </CartProvider> */}
+      <CartProvider>
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
+      </CartProvider>
     </FilterProvider>
   </ProductsProvider>,
   // </UserProvider>,

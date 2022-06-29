@@ -13,6 +13,7 @@ import {
 } from '../components';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const SingleProductPage = () => {
   const { id } = useParams();
@@ -58,6 +59,9 @@ const SingleProductPage = () => {
   return (
     <Wrapper>
       <PageHero title={name} product />
+      <Helmet>
+        <title>{name}</title>
+      </Helmet>
       <div className="section section-center page">
         <Link to="/products" className="btn">
           back to products

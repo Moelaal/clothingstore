@@ -19,12 +19,12 @@ const initialState = {
   sort: 'price-lowest',
   filters: {
     text: '',
-    company: 'all',
     category: 'all',
     color: 'all',
-    min_price: 0,
-    max_price: 0,
+    company: 'all',
     price: 0,
+    max_price: 0,
+    min_price: 0,
     shipping: false,
   },
 };
@@ -36,7 +36,10 @@ export const FilterProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    dispatch({ type: LOAD_PRODUCTS, payload: products });
+    dispatch({
+      type: LOAD_PRODUCTS,
+      payload: products,
+    });
   }, [products]);
 
   useEffect(() => {
@@ -51,19 +54,17 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: SET_LISTVIEW });
   };
   const updateSort = (e) => {
-    // for demonstration
-    // const name = e.target.name
     const value = e.target.value;
     dispatch({ type: UPDATE_SORT, payload: value });
   };
   const updateFilters = (e) => {
     let name = e.target.name;
     let value = e.target.value;
-    if (name === 'category') {
-      value = e.target.textContent;
-    }
     if (name === 'color') {
       value = e.target.dataset.color;
+    }
+    if (name === 'category') {
+      value = e.target.textContent;
     }
     if (name === 'price') {
       value = Number(value);
@@ -71,11 +72,13 @@ export const FilterProvider = ({ children }) => {
     if (name === 'shipping') {
       value = e.target.checked;
     }
+    console.log(name, value);
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };
   const clearFilters = () => {
     dispatch({ type: CLEAR_FILTERS });
   };
+
   return (
     <FilterContext.Provider
       value={{
