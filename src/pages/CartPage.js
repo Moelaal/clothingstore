@@ -6,13 +6,23 @@ import { CartContent, PageHero } from '../components';
 import { Helmet } from 'react-helmet-async';
 
 const CartPage = () => {
+  const { cart } = useCartContext();
+  if (cart.length < 1) {
+    <Wrapper className="page-100">
+      <h2>No cart items</h2>
+      <Link to="/products">Fill it</Link>
+    </Wrapper>;
+  }
   return (
-    <Wrapper>
+    <main>
       <Helmet>
         <title>Cart</title>
       </Helmet>
-      cart page
-    </Wrapper>
+      <PageHero title="cart" />
+      <Wrapper className="page">
+        <CartContent />
+      </Wrapper>
+    </main>
   );
 };
 
