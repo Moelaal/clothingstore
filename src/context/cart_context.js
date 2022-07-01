@@ -33,17 +33,22 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: ADD_TO_CART, payload: { id, color, amount, product } });
   };
 
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(state.cart));
-  }, [state.cart]);
-
   const removeItem = (id) => {
     dispatch({ type: REMOVE_CART_ITEM, payload: id });
   };
-  const toggleItem = (id, value) => {};
+  const toggleItem = (id, value) => {
+    console.log(id, value);
+    dispatch({ type: TOGGLE_CART_ITEM_AMOUNT, payload: { id, value } });
+  };
   const clearCart = () => {
     dispatch({ type: CLEAR_CART });
   };
+
+  useEffect(() => {
+    dispatch({ type: COUNT_CART_TOTALS });
+    localStorage.setItem('cart', JSON.stringify(state.cart));
+  }, [state.cart]);
+
   return (
     <CartContext.Provider
       value={{ ...state, addToCart, removeItem, toggleItem, clearCart }}
