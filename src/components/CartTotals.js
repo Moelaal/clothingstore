@@ -1,13 +1,34 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useCartContext } from '../context/cart_context'
-import { useUserContext } from '../context/user_context'
-import { formatPrice } from '../utils/helpers'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import styled from 'styled-components';
+import { useCartContext } from '../context/cart_context';
+import { useUserContext } from '../context/user_context';
+import { formatPrice } from '../utils/helpers';
+import { Link } from 'react-router-dom';
 
 const CartTotals = () => {
-  return <h4>cart totals</h4>
-}
+  const { total_amount, shipping_fee } = useCartContext();
+  return (
+    <Wrapper>
+      <div>
+        <article>
+          <h5>
+            subtotal : <span>{formatPrice(total_amount)}</span>
+          </h5>
+          <p>
+            shipping fee : <span>{formatPrice(shipping_fee)}</span>
+          </p>
+          <hr />
+          <h3>
+            total : <span>{formatPrice(total_amount + shipping_fee)}</span>
+          </h3>
+        </article>
+        <Link to="/checkout" className="btn">
+          Proceed to Checkout
+        </Link>
+      </div>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -18,7 +39,7 @@ const Wrapper = styled.section`
     border-radius: var(--radius);
     padding: 1.5rem 3rem;
   }
-  h4,
+  h3,
   h5,
   p {
     display: grid;
@@ -27,7 +48,7 @@ const Wrapper = styled.section`
   p {
     text-transform: capitalize;
   }
-  h4 {
+  h3 {
     margin-top: 2rem;
   }
   @media (min-width: 776px) {
@@ -39,6 +60,6 @@ const Wrapper = styled.section`
     text-align: center;
     font-weight: 700;
   }
-`
+`;
 
-export default CartTotals
+export default CartTotals;
