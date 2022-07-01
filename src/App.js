@@ -16,32 +16,34 @@ import {
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Sidebar />
-      <Switch>
-        <Route path="/" exact>
-          <Home />
-        </Route>
-        <Route path="/cart" exact>
-          <Cart />
-        </Route>
-        <Route path="/products" exact>
-          <Products />
-        </Route>
-        <Route path="/products/:id" children={<SingleProduct />} />
-        <Route exact path="/checkout">
-          <Checkout />
-        </Route>
-        <Route path="/about" exact>
-          <About />
-        </Route>
-        <Route path="*">
-          <Error />
-        </Route>
-      </Switch>
-      <Footer />
-    </Router>
+    <AuthWrapper>
+      <Router>
+        <Navbar />
+        <Sidebar />
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/cart" exact>
+            <Cart />
+          </Route>
+          <Route path="/products" exact>
+            <Products />
+          </Route>
+          <Route path="/products/:id" children={<SingleProduct />} />
+          <PrivateRoute exact path="/checkout">
+            <Checkout />
+          </PrivateRoute>
+          <Route path="/about" exact>
+            <About />
+          </Route>
+          <Route path="*">
+            <Error />
+          </Route>
+        </Switch>
+        <Footer />
+      </Router>
+    </AuthWrapper>
   );
 }
 
