@@ -38,10 +38,12 @@ export const CartProvider = ({ children }) => {
   }, [state.cart]);
 
   const removeItem = (id) => {
-    // dispatch({ type: REMOVE_CART_ITEM });
+    dispatch({ type: REMOVE_CART_ITEM, payload: id });
   };
   const toggleItem = (id, value) => {};
-  const clearCart = () => {};
+  const clearCart = () => {
+    dispatch({ type: CLEAR_CART });
+  };
   return (
     <CartContext.Provider
       value={{ ...state, addToCart, removeItem, toggleItem, clearCart }}
