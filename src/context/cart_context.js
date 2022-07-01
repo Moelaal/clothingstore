@@ -37,14 +37,14 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem('cart', JSON.stringify(state.cart));
   }, [state.cart]);
 
-  const removeItems = (id) => {
-    dispatch({ type: REMOVE_CART_ITEM });
+  const removeItem = (id) => {
+    // dispatch({ type: REMOVE_CART_ITEM });
   };
-  const toggleItems = (id, value) => {};
+  const toggleItem = (id, value) => {};
   const clearCart = () => {};
   return (
     <CartContext.Provider
-      value={{ ...state, addToCart, removeItems, toggleItems, clearCart }}
+      value={{ ...state, addToCart, removeItem, toggleItem, clearCart }}
     >
       {children}
     </CartContext.Provider>
