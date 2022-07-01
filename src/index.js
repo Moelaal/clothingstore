@@ -16,7 +16,6 @@ ReactDOM.render(
     redirectUri={window.location.origin}
     cacheLocation="localstorage"
   >
-    //{' '}
     <UserProvider>
       <ProductsProvider>
         <FilterProvider>
