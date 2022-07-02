@@ -5,13 +5,13 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useUserContext } from '../context/user_context';
 
 const PrivateRoute = ({ children, ...theRest }) => {
-  const { myUser } = useUserContext();
+  const { user } = useAuth0();
   console.log(children, theRest);
   return (
     <Route
       {...theRest}
       render={() => {
-        return myUser ? children : <Redirect to="/" />;
+        return user ? children : <Redirect to="/" />;
       }}
     ></Route>
   );
